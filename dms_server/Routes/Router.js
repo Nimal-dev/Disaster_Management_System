@@ -13,6 +13,7 @@ router.post('/signin', authController.signin);
 
 //--------------------SOS requests---------------------- //
 router.post('/sos', sosController.createSos);
+router.get('/getsos', sosController.getSosMessages);
 
 //--------------------Fetch notifications---------------------- //
 router.get('/notifications', notificationController.getNotifications);

@@ -21,3 +21,13 @@ exports.createSos = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+exports.getSosMessages = async (req, res) => {
+  try {
+    const sosMessages = await Sos.find({});
+    res.status(200).json(sosMessages);
+  } catch (error) {
+    console.error("Error fetching SOS messages:", error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};

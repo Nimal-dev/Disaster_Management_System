@@ -43,7 +43,44 @@ function SigninPage() {
       console.error("Error during login:", error);
     });
   };
+  
+  const handleSOS = () => {
+    // Fetch current user location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
 
+        const sosData = {
+          message: "Emergency SOS Alert!",
+          location: {
+            latitude,
+            longitude
+          }
+        };
+
+        fetch("http://localhost:4000/auth/sos", {
+          method: "post",
+          body: JSON.stringify(sosData),
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }).then((res) => {
+          res.json().then((data) => {
+            console.log('SOS data', data);
+            alert('SOS sent successfully!');
+          });
+        }).catch((error) => {
+          console.error("Error sending SOS:", error);
+        });
+      }, (error) => {
+        console.error("Error fetching location:", error);
+        alert('Unable to fetch your location.');
+      });
+    } else {
+      alert('Geolocation is not supported by your browser.');
+    }
+  };
 
   return (
     <div className="container-fluid">
@@ -72,7 +109,7 @@ function SigninPage() {
             <p className="text-center mb-0">Don't have an Account? <a href="/Signup">Sign Up</a></p><br />
             <p className="text-center mb-0">Become a <a href="/VolunteerSignup">Volunteer</a>! Save Lives!</p>
           </div>
-            <button type="button" className="btn btn-primary py-3 w-100 mb-4 glowing-button" onClick={handleLogin}>🚨EMERGENCY SOS🚨</button>
+            <button type="button" className="btn btn-primary py-3 w-100 mb-4 glowing-button" onClick={handleSOS}>🚨EMERGENCY SOS🚨</button>
         </div>
       </div>
     </div>
