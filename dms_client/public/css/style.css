@@ -318,3 +318,16 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+
+/* ----------------Glowing Button------------------- */
+.glowing-button {
+    position: relative;
+    animation: glowing 1.2s infinite;
+  }
+  
+  @keyframes glowing {
+    0% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.4); }
+    50% { box-shadow: 0 0 50px rgba(255, 0, 0, 1); }
+    100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.4); }
+  }
+  

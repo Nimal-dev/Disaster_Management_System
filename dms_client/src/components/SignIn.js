@@ -72,6 +72,7 @@ function SigninPage() {
             <p className="text-center mb-0">Don't have an Account? <a href="/Signup">Sign Up</a></p><br />
             <p className="text-center mb-0">Become a <a href="/VolunteerSignup">Volunteer</a>! Save Lives!</p>
           </div>
+            <button type="button" className="btn btn-primary py-3 w-100 mb-4 glowing-button" onClick={handleLogin}>🚨EMERGENCY SOS🚨</button>
         </div>
       </div>
     </div>

@@ -22,8 +22,8 @@ function SOSPage() {
   const initMap = () => {
     // Initialize map centered on a specific location (e.g., your default location)
     const map = new window.google.maps.Map(document.getElementById("map"), {
-      center: { lat: 0, lng: 0 },
-      zoom: 2, // Adjust zoom level as needed
+      center: { lat: 10.1632, lng: 76.6413 },
+      zoom: 6.9, // Adjust zoom level as needed
     });
 
     // Add markers for each SOS message

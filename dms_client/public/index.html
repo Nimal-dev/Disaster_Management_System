@@ -60,8 +60,24 @@
      <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
      <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA9uoXF2EfDwx4xGXVBgJhyz0b-xycP5I&libraries=places"></script>
-  
+     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCWED24ut0NZVXBKwkiynWByxmjj__fVcw&libraries=places" type="text/javascript"></script>
+<script type="text/javascript">
+  function initialize() {
+    var input = document.getElementById('searchTextField');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+      var place = autocomplete.getPlace();
+      var lat = place.geometry.location.lat();
+      var lng = place.geometry.location.lng();
+
+      document.getElementById("latitude").value = lat;
+      document.getElementById("longitude").value = lng;
+      // console.log(document.getElementById("latitude").value)
+
+    });
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
  
      <!-- Template Javascript -->
      <script src="js/main.js"></script>
