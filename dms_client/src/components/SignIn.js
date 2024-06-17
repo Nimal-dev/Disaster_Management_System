@@ -29,10 +29,13 @@ function SigninPage() {
           if (userType === 0) {
             navigate('/AdminHome');
           } else if (userType === 1) {
-            navigate('/ServiceProviderHome');
+            navigate('/StateHome');
           } else if (userType === 2) {
-            navigate('/CustomerHome');
-          } else {
+            navigate('/VolunteerHome');
+          }else if (userType === 3) {
+            navigate('/UserHome');
+          }
+           else {
             console.log("Unknown user type");
           }
         } else {
