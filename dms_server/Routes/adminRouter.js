@@ -9,6 +9,10 @@ router.post('/updateStateById', adminController.UpdateState);
 router.post('/editAndUpdateState', adminController.editAndUpdateState);
 router.post('/deleteState', adminController.deleteState);
 
+router.get('/viewusers', adminController.viewusers);
+router.post('/editAndUpdateUser', adminController.editAndUpdateUser);
+router.post('/getUserById', adminController.getUserById);
+router.post('/deleteUser', adminController.deleteUser);
 
 
 router.post('/updateVolunteerById', adminController.UpdateVolunteer);;

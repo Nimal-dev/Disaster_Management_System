@@ -53,13 +53,13 @@ function Sidebar() {
   const getDashboardLink = () => {
     switch (usertype) {
       case 0:
-        return "/AdminHome";
+        return "/";
       case 1:
-        return "/StateHome";
+        return "/";
       case 2:
-        return "/VolunteerHome";
+        return "/";
       case 3:
-        return "/UserHome";
+        return "/";
       default:
         return "/";
     }

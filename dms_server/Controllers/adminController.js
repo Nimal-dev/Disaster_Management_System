@@ -1,10 +1,13 @@
 const authmodels = require('../Models/authModel');
 const statemodels = require('../Models/stateModel');
 const volunteermodels = require('../Models/volunteerModel');
+const usermodels = require('../Models/userModel');
+
 const bcrypt = require('bcrypt');
 
 const authModel = authmodels.auth;
 const stateModel = statemodels.state;
+const usermodel = usermodels.user;
 const volunteerModel = volunteermodels.volunteer;
 
 
@@ -43,6 +46,16 @@ exports.viewstate = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+exports.viewusers = async (req, res) => {
+    try {
+        const users = await usermodel.find().populate('authid');
+        res.json(users);
+    } catch (error) {
+        console.error('Error fetching Users:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 
 exports.UpdateState = async (req, res) => {
     try {
@@ -203,5 +216,69 @@ exports.UpdateVolunteer = async (req, res) => {
     } catch (error) {
         console.error("Error in fetching volunteer details:", error);
         res.status(500).json({ error: "An error occurred while fetching the state details" });
+    }
+};
+
+
+
+exports.editAndUpdateUser = async (req, res) => {
+    try {
+        const userDetails = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            contact: req.body.contact,
+            
+        };
+        await usermodel.findByIdAndUpdate(req.body.id, userDetails);
+
+        const loginDetails = {
+            email: req.body.email,
+            userstatus: req.body.userstatus,
+        };
+        await usermodel.findByIdAndUpdate(req.body.authid, loginDetails);
+
+        res.json("updated");
+    } catch (error) {
+        console.error("Error in updating User:", error);
+        res.status(500).json({ error: "An error occurred while updating the user" });
+    }
+};
+
+exports.getUserById = async (req, res) => {
+    try {
+        const userDetails = await usermodel.findById(req.body.id).populate('authid');
+        if (!userDetails) {
+            return res.status(404).json({ error: 'user not found' });
+        }
+
+        res.json({
+            userDetails,
+            authDetails: userDetails.authid
+        });
+    } catch (error) {
+        console.error("Error in fetching user details:", error);
+        res.status(500).json({ error: "An error occurred while fetching the user details" });
+    }
+};
+
+exports.deleteUser = async (req, res) => {
+    try {
+        const userId = req.body.id;
+        const user = await usermodel.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Delete associated auth details
+        await authModel.findByIdAndDelete(user.authid);
+
+        // Delete the state
+        await usermodel.findByIdAndDelete(userId);
+
+        res.json({ message: 'User and associated auth details deleted successfully' });
+    } catch (error) {
+        console.error("Error in deleting User:", error);
+        res.status(500).json({ error: "An error occurred while deleting the User" });
     }
 };

@@ -18,6 +18,9 @@ function SigninPage() {
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       setEmailError('Email address is invalid');
       isValid = false;
+    } else if (/[A-Z]/.test(email)) {
+      setEmailError('Email address must be in lowercase');
+      isValid = false;
     } else {
       setEmailError('');
     }
@@ -82,7 +85,6 @@ function SigninPage() {
   };
 
   const handleSOS = () => {
-    // Fetch current user location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {

@@ -14,6 +14,7 @@ import SOSPage from "./components/common/SOSPage";
 import HelpRequestList from './components/Tables/HelpRequestList';
 import VolunteerSignUp from "./components/VolunteerSignUp";
 import ResourceRequestList from "./components/Tables/ResourceRequestList";
+import Edituser from "./components/Forms/Admin/Edituser";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
       <Route path="/VolunteerSignup" element={<VolunteerSignUp/>}/>
       <Route path="/AddVolunteer" element={<AddVolunteer/>}/>
       <Route path="/EditVolunteer" element={<EditVolunteer/>}/>
+      <Route path="/Edituser" element={<Edituser/>}/>
       <Route path="/SOSPage" element={<SOSPage/>}/>
 
     
